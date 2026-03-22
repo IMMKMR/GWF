@@ -97,6 +97,83 @@
             gap: 40px;
         }
 
+        .team-grid-scrollable {
+            display: grid;
+            grid-template-columns: none !important;
+            grid-template-rows: repeat(2, 1fr) !important;
+            grid-auto-flow: column;
+            grid-auto-columns: 320px;
+            gap: 40px;
+            overflow-x: auto;
+            padding-bottom: 25px; 
+            scroll-snap-type: x mandatory;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+        
+        .team-grid-scrollable .team-card,
+        .team-grid-scrollable .service-card {
+            scroll-snap-align: start;
+        }
+        
+        .team-grid-scrollable::-webkit-scrollbar {
+            display: none;
+        }
+
+        .team-grid-scrollable.three-cols-scroll {
+            grid-auto-columns: calc(33.333% - 26.66px);
+        }
+
+        @media (max-width: 900px) {
+            .team-grid-scrollable.three-cols-scroll {
+                grid-auto-columns: calc(50% - 20px);
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .team-grid-scrollable.three-cols-scroll {
+                grid-auto-columns: 100%;
+            }
+        }
+
+        .scroll-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .scroll-btn {
+            background-color: #fff;
+            border: 2px solid var(--peach);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            font-size: 20px;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: absolute;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-btn:hover {
+            background-color: var(--peach);
+            color: var(--dark);
+            transform: scale(1.05);
+        }
+
+        .scroll-btn.left { left: -22px; }
+        .scroll-btn.right { right: -22px; }
+
+        @media (max-width: 768px) {
+            .scroll-btn.left { left: 10px; }
+            .scroll-btn.right { right: 10px; }
+        }
+
         .team-card {
             background: #fff;
             border-radius: 24px;
@@ -361,6 +438,11 @@
             gap: 40px;
         }
 
+        .services-grid.two-cols {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
         .service-card {
             background: #fff;
             border-radius: 28px;
@@ -453,6 +535,87 @@
             margin-top: 20px;
         }
 
+        /* 
+         * Shared Services (Two Cols) - Unique Horizontal layout 
+         */
+        .services-grid.two-cols .service-card {
+            flex-direction: row;
+            text-align: left;
+            padding: 30px 40px;
+            align-items: center;
+        }
+
+        .services-grid.two-cols .service-card .card-bg {
+            height: 100%;
+            width: 130px;
+            border-radius: 0 50px 50px 0;
+            top: 0;
+            left: 0;
+        }
+
+        .services-grid.two-cols .service-card:hover .card-bg {
+            width: 170px;
+            height: 100%;
+            border-radius: 0 60px 60px 0;
+        }
+
+        .services-grid.two-cols .service-card .img-container {
+            width: 150px;
+            height: 150px;
+            margin: 0 35px 0 0;
+            border: 6px solid #fff;
+            align-self: center;
+        }
+
+        .services-grid.two-cols .service-card .service-info {
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .services-grid.two-cols .service-card .social-links {
+            justify-content: flex-start;
+            margin-top: 15px;
+        }
+
+        @media (max-width: 900px) {
+            .services-grid.two-cols .service-card {
+                flex-direction: column;
+                text-align: center;
+                padding: 0 0 40px 0;
+            }
+
+            .services-grid.two-cols .service-card .card-bg {
+                height: 160px;
+                width: 100%;
+                border-radius: 0 0 50% 50% / 0 0 50px 50px;
+            }
+
+            .services-grid.two-cols .service-card:hover .card-bg {
+                height: 200px;
+                width: 100%;
+                border-radius: 0 0 50% 50% / 0 0 70px 70px;
+            }
+
+            .services-grid.two-cols .service-card .img-container {
+                margin: 60px auto 30px;
+                width: 200px;
+                height: 200px;
+                border: 8px solid #fff;
+            }
+
+            .services-grid.two-cols .service-card .service-info {
+                align-items: center;
+                padding: 0 30px;
+            }
+
+            .services-grid.two-cols .service-card .social-links {
+                justify-content: center;
+            }
+        }
+
         @keyframes fadeInDown {
             from {
                 opacity: 0;
@@ -499,6 +662,7 @@
             }
         }
 
+
         @media (max-width: 768px) {
             .container {
                 padding: 40px 20px;
@@ -510,6 +674,11 @@
 
             .team-grid {
                 grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            }
+
+            .team-grid-scrollable {
+                grid-auto-columns: 260px;
+                gap: 20px;
             }
 
             .services-grid {
@@ -541,7 +710,7 @@
         .header-logo {
             padding-left: 81px;
         }
-        
+
         .header-logo img {
             height: 60px;
             display: block;
@@ -552,7 +721,7 @@
             height: 100%;
         }
 
-        .header-actions > * {
+        .header-actions>* {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -564,7 +733,7 @@
             transition: opacity 0.3s ease;
         }
 
-        .header-actions > *:hover {
+        .header-actions>*:hover {
             opacity: 0.85;
         }
 
@@ -630,7 +799,7 @@
             margin-bottom: 30px;
             letter-spacing: -0.5px;
         }
-        
+
         .contact-grid {
             display: grid;
             grid-template-columns: 100px 1fr;
@@ -806,20 +975,24 @@
                 grid-template-columns: 1fr;
                 gap: 50px;
             }
+
             .header-logo {
                 padding-left: 20px;
             }
+
             .header-about {
                 padding: 0 20px;
                 gap: 20px;
             }
         }
+
         @media (max-width: 768px) {
             .footer-bottom-links {
                 flex-direction: column;
                 gap: 15px;
                 text-align: center;
             }
+
             .footer-bottom-links span {
                 display: none;
             }
@@ -854,18 +1027,71 @@
         </div>
 
         <div id="team-container">
-            <div class="role-section">
-                <div class="founder-wrapper" data-aos="fade-up">
-                    <div class="founder-card">
-                        <div class="founder-img-container">
+            <div class="role-section shared-services-section">
+                <h2 class="role-title" data-aos="fade-right">Shared Services</h2>
+                <div class="services-grid two-cols">
+                    <!-- Asif Updahye moved here -->
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-bg color-0"></div>
+                        <div class="img-container">
                             <img src="images/Asif_Updahye.png" alt="Asif Updahye" loading="lazy">
                         </div>
-                        <div class="founder-info">
-                            <div class="role-badge">Founder & CEO</div>
+                        <div class="service-info">
                             <h3 class="member-name">Asif Updahye</h3>
-                            <p class="founder-bio">Leading Good Wave Foundation with a vision to create lasting impact
-                                and sustainable positive change in the community. Dedicated to empowering the next
-                                generation.</p>
+                            <div class="social-links">
+                                <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                    aria-label="LinkedIn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <img src="images/Elena_Raymond.jpg" alt="Elena Raymond " loading="lazy">
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Elena Raymond </h3>
+                            <div class="social-links">
+                                <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                    aria-label="LinkedIn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-bg color-2"></div>
+                        <div class="img-container">
+                            <img src="images/Rachael_Dmello.jpg" alt="Rachael Dmello" loading="lazy">
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Rachael Dmello</h3>
+                            <div class="social-links">
+                                <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                    aria-label="LinkedIn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card-bg color-0"></div>
+                        <div class="img-container">
+                            <img src="images/Jagruti_Devrukhkar.jpg" alt="Jagruti Devrukhkar " loading="lazy">
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Jagruti Devrukhkar </h3>
                             <div class="social-links">
                                 <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                     aria-label="LinkedIn">
@@ -879,17 +1105,21 @@
                     </div>
                 </div>
             </div>
+
+            <!-- Counsellors Section -->
             <div class="role-section">
-                <h2 class="role-title" data-aos="fade-right">Shared Services</h2>
-                <div class="services-grid">
+                <h2 class="role-title" data-aos="fade-right">Counsellors</h2>
+                <div class="scroll-container">
+                    <button class="scroll-btn left" onclick="document.getElementById('counsellors-grid').scrollBy({left: -360, behavior: 'smooth'})" aria-label="Previous">❮</button>
+                    <div class="services-grid team-grid-scrollable three-cols-scroll" id="counsellors-grid">
                     <div class="service-card" data-aos="fade-up" data-aos-delay="0">
                         <div class="card-bg color-1"></div>
                         <div class="img-container">
-                            <img src="images/Elena_Raymond.jpg" alt="Elena Raymond " loading="lazy">
+                            <img src="images/WIX_Aditi_Sarki__1_-removebg-preview.png" alt="Aditi Sarki" loading="lazy">
                         </div>
                         <div class="service-info">
-                            <h3 class="member-name">Elena Raymond </h3>
-                            <p class="member-designation">Human Resources & Talent Associate | Never Grow Up</p>
+                            <h3 class="member-name">Aditi Sarki</h3>
+                            <p class="member-designation">Counselling Psychologist</p>
                             <div class="social-links">
                                 <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                     aria-label="LinkedIn">
@@ -904,11 +1134,11 @@
                     <div class="service-card" data-aos="fade-up" data-aos-delay="100">
                         <div class="card-bg color-2"></div>
                         <div class="img-container">
-                            <img src="images/Rachael_Dmello.jpg" alt="Rachael Dmello" loading="lazy">
+                            <img src="images/WIX_Swati_-removebg-preview.png" alt="Swati Navalgundkar" loading="lazy">
                         </div>
                         <div class="service-info">
-                            <h3 class="member-name">Rachael Dmello</h3>
-                            <p class="member-designation">Senior Human Resources & Talent Associate | Never Grow Up</p>
+                            <h3 class="member-name">Swati Navalgundkar</h3>
+                            <p class="member-designation">Counselling Psychologist</p>
                             <div class="social-links">
                                 <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                     aria-label="LinkedIn">
@@ -920,29 +1150,117 @@
                             </div>
                         </div>
                     </div>
-                    <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="card-bg color-0"></div>
                         <div class="img-container">
-                            <img src="images/Jagruti_Devrukhkar.jpg" alt="Jagruti Devrukhkar " loading="lazy">
+                            <img src="images/WIX_Tamanna__1_-removebg-preview.png" alt="Tamanna Amin Laskar"
+                                loading="lazy">
                         </div>
                         <div class="service-info">
-                            <h3 class="member-name">Jagruti Devrukhkar </h3>
-                            <p class="member-designation">Accountant | Yellow Seed </p>
-
+                            <h3 class="member-name">Tamanna Amin Laskar</h3>
+                            <p class="member-designation">Counselling Psychologist</p>
+                            <div class="social-links">
+                                <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                    aria-label="LinkedIn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <img src="images/WIX_Pareena__1_-removebg-preview.png" alt="Pareena Sahukar" loading="lazy">
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Pareena Sahukar</h3>
+                            <p class="member-designation">Counselling Psychologist</p>
+                            <div class="social-links">
+                                <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                    aria-label="LinkedIn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card-bg color-2"></div>
+                        <div class="img-container">
+                            <img src="images/WIX_Jaanvi-removebg-preview.png" alt="Jaanvi Java" loading="lazy">
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Jaanvi Java</h3>
+                            <p class="member-designation">Counselling Psychologist</p>
+                            <div class="social-links">
+                                <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                    aria-label="LinkedIn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="card-bg color-0"></div>
+                        <div class="img-container">
+                            <img src="images/WIX_Sameeksha__1_-removebg-preview.png" alt="Sameeksha Phadke"
+                                loading="lazy">
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Sameeksha Phadke</h3>
+                            <p class="member-designation">Counselling Psychologist</p>
+                            <div class="social-links">
+                                <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                    aria-label="LinkedIn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <img src="images/WIX_Sneha_-removebg-preview.png" alt="Sneha Shivarajan" loading="lazy">
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Sneha Shivarajan</h3>
+                            <div class="social-links">
+                                <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                    aria-label="LinkedIn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <button class="scroll-btn right" onclick="document.getElementById('counsellors-grid').scrollBy({left: 360, behavior: 'smooth'})" aria-label="Next">❯</button>
             </div>
+        </div>
             <div class="role-section">
-                <h2 class="role-title" data-aos="fade-right">Team Members</h2>
-                <div class="team-grid">
+                <h2 class="role-title" data-aos="fade-right">Well-being Ambassador</h2>
+                <div class="scroll-container">
+                    <button class="scroll-btn left" onclick="document.getElementById('ambassador-grid').scrollBy({left: -360, behavior: 'smooth'})" aria-label="Previous">❮</button>
+                    <div class="team-grid team-grid-scrollable" id="ambassador-grid">
                     <div class="team-card" data-aos="fade-up" data-aos-delay="0">
                         <div class="card-bg color-1"></div>
                         <div class="img-container">
                             <img src="images/Akash_Kapdekar.jpg" alt="Akash Kapdekar" loading="lazy">
                         </div>
                         <h3 class="member-name">Akash Kapdekar</h3>
-                        <p class="member-designation">Sr Manager | ORM | SPRD</p>
                         <div class="social-links">
                             <a href="https://www.linkedin.com/in/akashkapdekar/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BpN9H4od3Rb%2BJ3JoEnZAWhw%3D%3D"
                                 class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -959,8 +1277,15 @@
                             <img src="images/Aakash_Khemchandani.jpg" alt="Aakash Khemchandani" loading="lazy">
                         </div>
                         <h3 class="member-name">Aakash Khemchandani</h3>
-                        <p class="member-designation">Content Writer | Never Grow Up </p>
-
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                     <div class="team-card" data-aos="fade-up" data-aos-delay="200">
                         <div class="card-bg color-0"></div>
@@ -968,8 +1293,15 @@
                             <img src="images/Abhishek_Hawal.jpg" alt="Abhishek Hawal" loading="lazy">
                         </div>
                         <h3 class="member-name">Abhishek Hawal</h3>
-                        <p class="member-designation">Associate Director | Business Growth | Never Grow Up </p>
-
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                     <div class="team-card" data-aos="fade-up" data-aos-delay="300">
                         <div class="card-bg color-1"></div>
@@ -977,7 +1309,6 @@
                             <img src="images/Angad_Saimbi.png" alt="Angad Saimbi" loading="lazy">
                         </div>
                         <h3 class="member-name">Angad Saimbi</h3>
-                        <p class="member-designation">Associate Director | Business Growth | Yellow Seed </p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -994,7 +1325,6 @@
                             <img src="images/Chaitrali_Joshi.jpg" alt="Chaitrali Joshi" loading="lazy">
                         </div>
                         <h3 class="member-name">Chaitrali Joshi</h3>
-                        <p class="member-designation">Content Writer | Never Grow Up </p>
                         <div class="social-links">
                             <a href="https://www.linkedin.com/in/chaitrali-joshi-59a27b230/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BVV0PxzpBRsuRdvY7C9NpFw%3D%3D"
                                 class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -1011,7 +1341,6 @@
                             <img src="images/Danesh_Mistry.jpg" alt="Danesh Mistry" loading="lazy">
                         </div>
                         <h3 class="member-name">Danesh Mistry</h3>
-                        <p class="member-designation">Growth Associate | Never Grow Up</p>
                         <div class="social-links">
                             <a href="https://www.linkedin.com/in/daneshmistry/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BxQ%2F1A1LlSL6U%2Fu5eDPrXHg%3D%3D"
                                 class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -1028,7 +1357,6 @@
                             <img src="images/Deepa_Venkatraman.jpg" alt="Deepa Venkatraman" loading="lazy">
                         </div>
                         <h3 class="member-name">Deepa Venkatraman</h3>
-                        <p class="member-designation">Senior Creative Strategist | Never Grow Up</p>
                         <div class="social-links">
                             <a href="https://www.linkedin.com/in/deepavenkatraman13/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BEFK2ppInQimPyn5Rn6Mqsg%3D%3D"
                                 class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -1045,7 +1373,6 @@
                             <img src="images/Eva_Ninan.jpg" alt="Eva Ninan" loading="lazy">
                         </div>
                         <h3 class="member-name">Eva Ninan</h3>
-                        <p class="member-designation">Client Success Associate </p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -1062,7 +1389,6 @@
                             <div class="img-placeholder">G</div>
                         </div>
                         <h3 class="member-name">Gracia Carvalho</h3>
-                        <p class="member-designation">Client Success Associate </p>
                         <div class="social-links">
                             <a href="https://www.linkedin.com/in/graciacarvalho07/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BM22xmk%2BPSguxxXQzLuw9TQ%3D%3D"
                                 class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -1079,7 +1405,6 @@
                             <img src="images/Immanuel_Kumar.jpg" alt="Immanuel Kumar" loading="lazy">
                         </div>
                         <h3 class="member-name">Immanuel Kumar</h3>
-                        <p class="member-designation">Graphic Designer | Yellow Seed </p>
                         <div class="social-links">
                             <a href="https://www.linkedin.com/in/immanuel-kumar-333-dev/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BbAsL1V6yS5mNrC%2Fz9ygdxg%3D%3D"
                                 class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -1096,7 +1421,6 @@
                             <img src="images/Jahnavi_Singh.jpg" alt="Jahnavi Singh" loading="lazy">
                         </div>
                         <h3 class="member-name">Jahnavi Singh</h3>
-                        <p class="member-designation">Client Success Associate | NGU</p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -1113,7 +1437,6 @@
                             <img src="images/Jenica_Mehta.jpg" alt="Jenica Mehta" loading="lazy">
                         </div>
                         <h3 class="member-name">Jenica Mehta</h3>
-                        <p class="member-designation">Sr. Public Relations & Communications Associate | SPRD </p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -1130,7 +1453,6 @@
                             <img src="images/Kinjal_Bhanushali.jpg" alt="Kinjal Bhanushali" loading="lazy">
                         </div>
                         <h3 class="member-name">Kinjal Bhanushali</h3>
-                        <p class="member-designation">Public Relations Associate | SPRD </p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -1147,7 +1469,6 @@
                             <img src="images/Laksh_Bansal.jpg" alt="Laksh Bansal" loading="lazy">
                         </div>
                         <h3 class="member-name">Laksh Bansal</h3>
-                        <p class="member-designation">Social Media Strategist | Never Grow Up</p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -1164,7 +1485,6 @@
                             <img src="images/Malavika_Binu.jpg" alt="Malavika Binu" loading="lazy">
                         </div>
                         <h3 class="member-name">Malavika Binu</h3>
-                        <p class="member-designation">Sr. Content Writer | Never Grow Up</p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -1181,7 +1501,6 @@
                             <img src="images/Naina_Talreja.jpg" alt="Naina Talreja" loading="lazy">
                         </div>
                         <h3 class="member-name">Naina Talreja</h3>
-                        <p class="member-designation">Graphic Designer </p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -1198,7 +1517,6 @@
                             <img src="images/Nidhi_Pawar.jpg" alt="Nidhi Pawar" loading="lazy">
                         </div>
                         <h3 class="member-name">Nidhi Pawar</h3>
-                        <p class="member-designation">Sr. Public Relations & Communications Associate</p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -1215,7 +1533,6 @@
                             <img src="images/Pavitra_Mudaliar.jpg" alt="Pavitra Mudaliar" loading="lazy">
                         </div>
                         <h3 class="member-name">Pavitra Mudaliar</h3>
-                        <p class="member-designation">Communication & Social Media Associate </p>
                         <div class="social-links">
                             <a href="https://www.linkedin.com/in/pavitra-mudaliar-744592363/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BQJ7yRiqwRGS3nICfv5qjwg%3D%3D"
                                 class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
@@ -1232,8 +1549,16 @@
                             <img src="images/Pranita_Panchal.jpg" alt="Pranita Panchal" loading="lazy">
                         </div>
                         <h3 class="member-name">Pranita Panchal</h3>
-                        <p class="member-designation">ORM Associate | SPRD </p>
 
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
                     </div>
                     <div class="team-card" data-aos="fade-up" data-aos-delay="300">
                         <div class="card-bg color-2"></div>
@@ -1241,7 +1566,6 @@
                             <img src="images/Rianna_Tarapore.jpg" alt="Rianna Tarapore" loading="lazy">
                         </div>
                         <h3 class="member-name">Rianna Tarapore</h3>
-                        <p class="member-designation">Content Writer </p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -1258,7 +1582,6 @@
                             <img src="images/Salonee_Rajadhyaksha.jpg" alt="Salonee Rajadhyaksha" loading="lazy">
                         </div>
                         <h3 class="member-name">Salonee Rajadhyaksha</h3>
-                        <p class="member-designation">Client Success Associate</p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -1275,7 +1598,6 @@
                             <img src="images/Shinjita_Ghosh.jpg" alt="Shinjita Ghosh" loading="lazy">
                         </div>
                         <h3 class="member-name">Shinjita Ghosh</h3>
-                        <p class="member-designation">Content Writer </p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -1292,7 +1614,6 @@
                             <img src="images/Srishti_Das.jpg" alt="Srishti Das" loading="lazy">
                         </div>
                         <h3 class="member-name">Srishti Das</h3>
-                        <p class="member-designation">Client Success Associate</p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -1309,7 +1630,6 @@
                             <img src="images/Twisha_Thakore.jpg" alt="Twisha Thakore" loading="lazy">
                         </div>
                         <h3 class="member-name">Twisha Thakore</h3>
-                        <p class="member-designation">People & Culture Consultant </p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -1326,7 +1646,6 @@
                             <img src="images/Vidisha_Verma.jpg" alt="Vidisha Verma" loading="lazy">
                         </div>
                         <h3 class="member-name">Vidisha Verma</h3>
-                        <p class="member-designation">Content Writer </p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -1343,7 +1662,6 @@
                             <img src="images/Vinayak_Gunjal.png" alt="Vinayak Gunjal" loading="lazy">
                         </div>
                         <h3 class="member-name">Vinayak Gunjal</h3>
-                        <p class="member-designation">Quantitative Researcher </p>
                         <div class="social-links">
                             <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
                                 aria-label="LinkedIn">
@@ -1355,8 +1673,10 @@
                         </div>
                     </div>
                 </div>
+                <button class="scroll-btn right" onclick="document.getElementById('ambassador-grid').scrollBy({left: 360, behavior: 'smooth'})" aria-label="Next">❯</button>
             </div>
         </div>
+    </div>
     </div>
 
     <footer class="main-footer">
@@ -1365,27 +1685,35 @@
                 <!-- Col 1: Contact Us -->
                 <div class="footer-col">
                     <h3 class="footer-title">Contact Us</h3>
-                    
+
                     <div class="contact-grid">
                         <div class="contact-label">PHONE</div>
                         <div class="contact-value">+91 88284 39700</div>
-                        
+
                         <div class="contact-label">EMAIL</div>
                         <div class="contact-value">hello@goodwavefoundation.org</div>
-                        
+
                         <div class="contact-label">ADDRESS</div>
-                        <div class="contact-value">Awfis @ The Ruby, JK Sawant Marg, Dadar West, Mumbai,<br>Maharashtra 400028.</div>
+                        <div class="contact-value">Awfis @ The Ruby, JK Sawant Marg, Dadar West, Mumbai,<br>Maharashtra
+                            400028.</div>
                     </div>
 
-                    <p class="bold-contact-text">You can be an active part of this movement by spreading the<br>word about what we do. Or you can share your own story too.</p>
+                    <p class="bold-contact-text">You can be an active part of this movement by spreading the<br>word
+                        about what we do. Or you can share your own story too.</p>
                     <p class="normal-contact-text">Like. Share. Comment. Every little bit helps.</p>
 
                     <div class="footer-socials">
                         <a href="#" class="footer-social-btn" aria-label="Instagram">
-                            <svg viewBox="0 0 448 512"><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.5-25.9-7.1-48.9-24.5-66.4-17.4-17.4-40.4-23-66.4-24.5-27.4-1.6-109.4-1.6-136.8 0-25.9 1.5-48.9 7.1-66.4 24.5-17.4 17.4-23 40.4-24.5 66.4-1.6 27.4-1.6 109.4 0 136.8 1.5 25.9 7.1 48.9 24.5 66.4 17.4 17.4 40.4 23 66.4 24.5 27.4 1.6 109.4 1.6 136.8 0 25.9-1.5 48.9-7.1 66.4-24.5 17.4-17.4 23-40.4 24.5-66.4 1.6-27.4 1.6-109.4 0-136.8zM388.5 388.5c-11.1 11.1-26.1 14.9-52 16.5-25.2 1.5-101.4 1.5-126.6 0-25.9-1.5-40.9-5.4-52-16.5-11.1-11.1-14.9-26.1-16.5-52-1.5-25.2-1.5-101.4 0-126.6 1.5-25.9 5.4-40.9 16.5-52 11.1-11.1 26.1-14.9 52-16.5 25.2-1.5 101.4-1.5 126.6 0 25.9 1.5 40.9 5.4 52 16.5 11.1 11.1 14.9 26.1 16.5 52 1.5 25.2 1.5 101.4 0 126.6-1.5 26-5.4 41-16.5 52z"/></svg>
+                            <svg viewBox="0 0 448 512">
+                                <path
+                                    d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.5-25.9-7.1-48.9-24.5-66.4-17.4-17.4-40.4-23-66.4-24.5-27.4-1.6-109.4-1.6-136.8 0-25.9 1.5-48.9 7.1-66.4 24.5-17.4 17.4-23 40.4-24.5 66.4-1.6 27.4-1.6 109.4 0 136.8 1.5 25.9 7.1 48.9 24.5 66.4 17.4 17.4 40.4 23 66.4 24.5 27.4 1.6 109.4 1.6 136.8 0 25.9-1.5 48.9-7.1 66.4-24.5 17.4-17.4 23-40.4 24.5-66.4 1.6-27.4 1.6-109.4 0-136.8zM388.5 388.5c-11.1 11.1-26.1 14.9-52 16.5-25.2 1.5-101.4 1.5-126.6 0-25.9-1.5-40.9-5.4-52-16.5-11.1-11.1-14.9-26.1-16.5-52-1.5-25.2-1.5-101.4 0-126.6 1.5-25.9 5.4-40.9 16.5-52 11.1-11.1 26.1-14.9 52-16.5 25.2-1.5 101.4-1.5 126.6 0 25.9 1.5 40.9 5.4 52 16.5 11.1 11.1 14.9 26.1 16.5 52 1.5 25.2 1.5 101.4 0 126.6-1.5 26-5.4 41-16.5 52z" />
+                            </svg>
                         </a>
                         <a href="#" class="footer-social-btn" aria-label="LinkedIn">
-                            <svg viewBox="0 0 448 512"><path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z"/></svg>
+                            <svg viewBox="0 0 448 512">
+                                <path
+                                    d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                            </svg>
                         </a>
                     </div>
                 </div>
@@ -1393,14 +1721,15 @@
                 <!-- Col 2: Spread The Word -->
                 <div class="footer-col">
                     <h3 class="footer-title">Spread The Word</h3>
-                    <p class="spread-word-text">Want to offer your time as a Mental Health Professional,<br>Intern, Campus Ambassador? Or be a donor?</p>
+                    <p class="spread-word-text">Want to offer your time as a Mental Health Professional,<br>Intern,
+                        Campus Ambassador? Or be a donor?</p>
                     <p class="spread-word-text">We are always looking for more hands on deck.</p>
-                    
+
                     <form class="footer-form">
                         <input type="text" class="form-input" placeholder="Name" required>
                         <input type="email" class="form-input" placeholder="Email" required>
                         <input type="tel" class="form-input" placeholder="Phone">
-                        
+
                         <div class="form-action-row">
                             <button type="submit" class="submit-btn" aria-label="Submit Form">Submit</button>
                             <a href="#" class="back-to-top">Back to Top</a>
@@ -1410,9 +1739,11 @@
             </div>
 
             <div class="footer-bottom">
-                <p class="footer-text">All donations to Good Wave Foundation are eligible for a <strong>tax exemption under section 80G</strong> of the Income Tax Act.</p>
-                <p class="footer-text">Good Wave Foundation is a <strong>not for profit organization</strong>, registered as Good Wave Foundation under section 8 of the Companies Act, 2013.</p>
-                
+                <p class="footer-text">All donations to Good Wave Foundation are eligible for a <strong>tax exemption
+                        under section 80G</strong> of the Income Tax Act.</p>
+                <p class="footer-text">Good Wave Foundation is a <strong>not for profit organization</strong>,
+                    registered as Good Wave Foundation under section 8 of the Companies Act, 2013.</p>
+
                 <div class="footer-bottom-links">
                     <span>© 2025 by Good Wave Foundation. All Rights Reserved</span>
                     <span style="color: rgba(0,0,0,0.2)">|</span>
