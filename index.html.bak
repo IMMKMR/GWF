@@ -1,0 +1,1528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GWF Team</title>
+    <!-- Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Poppins:wght@600;700&display=swap"
+        rel="stylesheet">
+    <!-- Animations (AOS) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <style>
+        :root {
+            --peach: #fcd3c7;
+            --green: #84e4a8;
+            --blue: #90d4d7;
+            --dark: #19191b;
+            --gray: #787a82;
+            --accent: #116dff;
+            --bg: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg);
+            color: var(--dark);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 60px 40px;
+        }
+
+        .header-section {
+            text-align: center;
+            margin-bottom: 80px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .header-section h4 {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 16px;
+        }
+
+        .header-section h1 {
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin: 0 0 24px 0;
+            color: var(--dark);
+        }
+
+        .header-section p {
+            font-size: 18px;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .role-section {
+            margin-bottom: 80px;
+        }
+
+        .role-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 40px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid var(--peach);
+            display: inline-block;
+            color: var(--dark);
+        }
+
+        .role-section:nth-child(even) .role-title {
+            border-bottom-color: var(--green);
+        }
+
+        .role-section:nth-child(3n) .role-title {
+            border-bottom-color: var(--blue);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 40px;
+        }
+
+        .team-card {
+            background: #fff;
+            border-radius: 24px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            text-align: center;
+            padding-bottom: 30px;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .team-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-bg {
+            height: 140px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transition: height 0.4s ease;
+        }
+
+        .team-card:hover .card-bg {
+            height: 180px;
+        }
+
+        .color-0 {
+            background-color: var(--peach);
+        }
+
+        .color-1 {
+            background-color: var(--green);
+        }
+
+        .color-2 {
+            background-color: var(--blue);
+        }
+
+        .img-container {
+            width: 180px;
+            height: 180px;
+            margin: 50px auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 6px solid #fff;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            position: relative;
+            background-color: #fff;
+        }
+
+        .img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .team-card:hover .img-container img {
+            transform: scale(1.1);
+        }
+
+        .img-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f0f0f0;
+            font-family: 'Poppins', sans-serif;
+            font-size: 48px;
+            color: #ccc;
+        }
+
+        .member-name {
+            font-family: 'Poppins', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--dark);
+            margin: 0 0 8px 0;
+        }
+
+        .member-designation {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--accent);
+            margin: 0 0 16px 0;
+            padding: 0 20px;
+            min-height: 40px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .social-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: #f4f5f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--dark);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-icon:hover {
+            background: var(--accent);
+            color: #fff;
+            transform: translateY(-3px);
+        }
+
+        .social-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        /* UNIQUE STYLES: Founder */
+        .founder-wrapper {
+            position: relative;
+            margin-bottom: 60px;
+            border-radius: 36px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .founder-wrapper:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .founder-card {
+            display: flex;
+            background: var(--peach);
+            border-radius: 36px;
+            overflow: hidden;
+            position: relative;
+            align-items: center;
+            padding: 50px 60px;
+            gap: 60px;
+            color: var(--dark);
+        }
+
+        /* A subtle animated glow inside */
+        .founder-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 40% 40%, rgba(255, 255, 255, 0.6) 0%, transparent 40%);
+            animation: pulseGlow 8s infinite alternate ease-in-out;
+            pointer-events: none;
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                transform: scale(0.9) translate(0, 0);
+            }
+
+            100% {
+                transform: scale(1.1) translate(10%, 10%);
+            }
+        }
+
+        .founder-img-container {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            /* Circle to contrast with square cards */
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            flex-shrink: 0;
+        }
+
+        .founder-img-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .founder-wrapper:hover .founder-img-container img {
+            transform: scale(1.08);
+        }
+
+        .founder-info {
+            z-index: 1;
+            text-align: left;
+            flex: 1;
+        }
+
+        .founder-info .role-badge {
+            display: inline-block;
+            background: #ffffff;
+            color: var(--accent);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .founder-info .member-name {
+            font-size: 44px;
+            margin: 0 0 8px 0;
+            color: var(--dark);
+        }
+
+        .founder-info .member-designation {
+            font-size: 20px;
+            color: rgba(25, 25, 27, 0.7);
+            padding: 0;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .founder-bio {
+            color: rgba(25, 25, 27, 0.8);
+            font-size: 17px;
+            margin-top: 24px;
+            line-height: 1.7;
+            max-width: 95%;
+        }
+
+        .founder-info .social-links {
+            justify-content: flex-start;
+            margin-top: 35px;
+        }
+
+        .founder-info .social-icon {
+            background: #fff;
+            color: var(--dark);
+        }
+
+        .founder-info .social-icon:hover {
+            background: var(--accent);
+            color: #fff;
+        }
+
+        /* NEW STYLES: Shared Services */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            gap: 40px;
+        }
+
+        .service-card {
+            background: #fff;
+            border-radius: 28px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            padding-bottom: 40px;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.12);
+        }
+
+        .service-card .card-bg {
+            height: 160px;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            border-radius: 0 0 50% 50% / 0 0 50px 50px;
+        }
+
+        .service-card .card-bg.color-0 {
+            background: linear-gradient(145deg, var(--peach) 10%, #ffece7 100%);
+        }
+
+        .service-card .card-bg.color-1 {
+            background: linear-gradient(145deg, var(--green) 10%, #e6fcf0 100%);
+        }
+
+        .service-card .card-bg.color-2 {
+            background: linear-gradient(145deg, var(--blue) 10%, #eaf8f9 100%);
+        }
+
+        .service-card:hover .card-bg {
+            height: 200px;
+            border-radius: 0 0 50% 50% / 0 0 70px 70px;
+        }
+
+        .service-card .img-container {
+            width: 200px;
+            height: 200px;
+            margin: 60px auto 30px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 8px solid #fff;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            position: relative;
+            background-color: #fff;
+            flex-shrink: 0;
+            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .service-card:hover .img-container {
+            transform: scale(1.06) translateY(-5px);
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-info {
+            flex: 1;
+            padding: 0 30px;
+            width: 100%;
+        }
+
+        .service-info .member-name {
+            font-size: 28px;
+            margin-bottom: 8px;
+            color: var(--dark);
+        }
+
+        .service-info .member-designation {
+            font-size: 16px;
+            padding: 0;
+            margin-bottom: 20px;
+            min-height: auto;
+        }
+
+        .service-info .social-links {
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .founder-card {
+                flex-direction: column;
+                text-align: center;
+                gap: 30px;
+                padding: 40px 20px;
+                border-radius: 27px;
+            }
+
+            .founder-img-container {
+                margin: 0 auto;
+                width: 220px;
+                height: 220px;
+            }
+
+            .founder-info {
+                text-align: center;
+                padding: 0;
+            }
+
+            .founder-info .member-name {
+                font-size: 36px;
+            }
+
+            .founder-bio {
+                margin: 20px auto 0;
+                max-width: 100%;
+            }
+
+            .founder-info .social-links {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 40px 20px;
+            }
+
+            .header-section h1 {
+                font-size: 36px;
+            }
+
+            .team-grid {
+                grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .desktop-nav {
+                display: none;
+            }
+
+            .header-container {
+                padding: 15px 20px;
+            }
+        }
+
+        /* HEADER STYLES */
+        .main-header {
+            background-color: #fff;
+            height: 81px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .header-logo {
+            padding-left: 81px;
+        }
+
+        .header-logo img {
+            height: 60px;
+            display: block;
+        }
+
+        .header-actions {
+            display: flex;
+            height: 100%;
+        }
+
+        .header-actions>* {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100%;
+            font-family: 'Inter', sans-serif;
+            font-size: 14px;
+            color: #000;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .header-actions>*:hover {
+            opacity: 0.85;
+        }
+
+        .header-donate {
+            background-color: #8de2a6;
+            width: 120px;
+        }
+
+        .header-action {
+            background-color: #a1d5d8;
+            width: 120px;
+        }
+
+        .header-about {
+            background-color: #ffdacb;
+            padding: 0 60px;
+            gap: 80px;
+        }
+
+        .hamburger-icon {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            cursor: pointer;
+        }
+
+        .hamburger-icon span {
+            display: block;
+            width: 30px;
+            height: 3px;
+            background-color: #000;
+            border-radius: 2px;
+        }
+
+        /* FOOTER STYLES */
+        .main-footer {
+            background-color: #fff;
+            padding: 80px 40px 40px;
+            margin-top: 100px;
+            text-align: left;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .footer-top {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 80px;
+            margin-bottom: 60px;
+            max-width: 1200px;
+            margin: 0 auto 60px;
+        }
+
+        .footer-title {
+            font-size: 32px;
+            font-family: inherit;
+            font-weight: 400;
+            color: var(--dark);
+            margin-bottom: 30px;
+            letter-spacing: -0.5px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 100px 1fr;
+            gap: 20px;
+            align-items: baseline;
+            margin-bottom: 10px;
+        }
+
+        .contact-label {
+            font-size: 12px;
+            font-weight: 500;
+            color: #555;
+            text-transform: uppercase;
+        }
+
+        .contact-value {
+            font-size: 15px;
+            color: var(--dark);
+            font-family: 'Inter', sans-serif;
+        }
+
+        .bold-contact-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            color: #000;
+            line-height: 1.6;
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        .normal-contact-text {
+            font-family: 'Inter', sans-serif;
+            font-size: 15px;
+            color: #000;
+            margin-bottom: 25px;
+        }
+
+        .footer-socials {
+            display: flex;
+            gap: 15px;
+        }
+
+        .footer-social-btn {
+            width: 30px;
+            height: 30px;
+            background-color: #000;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .footer-social-btn:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+        }
+
+        .footer-social-btn svg {
+            width: 14px;
+            height: 14px;
+            fill: currentColor;
+        }
+
+        .spread-word-text {
+            font-size: 15px;
+            color: #000;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 10px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px 0;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            background-color: transparent;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-bottom-color: var(--dark);
+        }
+
+        .form-action-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-top: 5px;
+        }
+
+        .submit-btn {
+            background-color: #8de2a6;
+            color: #000;
+            padding: 10px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 400;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .submit-btn:hover {
+            opacity: 0.9;
+        }
+
+        .back-to-top {
+            font-size: 14px;
+            color: #000;
+            text-decoration: none;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .back-to-top:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 40px;
+        }
+
+        .footer-text {
+            color: #000;
+            font-size: 13px;
+            margin-bottom: 5px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-text strong {
+            font-weight: 700;
+        }
+
+        .footer-bottom-links {
+            margin-top: 30px;
+            color: var(--dark);
+            font-size: 13px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .footer-bottom-links a {
+            color: var(--dark);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-bottom-links a:hover {
+            opacity: 0.7;
+        }
+
+        @media (max-width: 900px) {
+            .footer-top {
+                grid-template-columns: 1fr;
+                gap: 50px;
+            }
+
+            .header-logo {
+                padding-left: 20px;
+            }
+
+            .header-about {
+                padding: 0 20px;
+                gap: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .footer-bottom-links {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .footer-bottom-links span {
+                display: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="main-header">
+        <a href="#" class="header-logo"><img src="./images/logo.png" alt="Good Wave Foundation Logo"></a>
+        <div class="header-actions">
+            <a href="#" class="header-donate">Donate</a>
+            <a href="#" class="header-action">Take Action</a>
+            <a href="#" class="header-about">
+                About
+                <div class="hamburger-icon">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="header-section">
+            <h4>Our Team</h4>
+            <h1>Meet the Good Wave Team</h1>
+            <p>Bringing passion and expertise to everything we do. Meet our inspiring team members driving positive
+                change.</p>
+        </div>
+
+        <div id="team-container">
+            <div class="role-section">
+                <h2 class="role-title" data-aos="fade-right">Shared Services</h2>
+                <div class="services-grid">
+                    <!-- Asif Updahye moved here -->
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-bg color-0"></div>
+                        <div class="img-container">
+                            <img src="images/Asif_Updahye.png" alt="Asif Updahye" loading="lazy">
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Asif Updahye</h3>
+                            <p class="member-designation">Founder & CEO</p>
+                            <div class="social-links">
+                                <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                    aria-label="LinkedIn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <img src="images/Elena_Raymond.jpg" alt="Elena Raymond " loading="lazy">
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Elena Raymond </h3>
+                            <p class="member-designation">Human Resources & Talent Associate | Never Grow Up</p>
+                            <div class="social-links">
+                                <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                    aria-label="LinkedIn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-bg color-2"></div>
+                        <div class="img-container">
+                            <img src="images/Rachael_Dmello.jpg" alt="Rachael Dmello" loading="lazy">
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Rachael Dmello</h3>
+                            <p class="member-designation">Senior Human Resources & Talent Associate | Never Grow Up</p>
+                            <div class="social-links">
+                                <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                    aria-label="LinkedIn">
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                        <path
+                                            d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card-bg color-0"></div>
+                        <div class="img-container">
+                            <img src="images/Jagruti_Devrukhkar.jpg" alt="Jagruti Devrukhkar " loading="lazy">
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Jagruti Devrukhkar </h3>
+                            <p class="member-designation">Accountant | Yellow Seed </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Counsellors Section -->
+            <div class="role-section">
+                <h2 class="role-title" data-aos="fade-right">Counsellors</h2>
+                <div class="services-grid">
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <div class="img-placeholder">AS</div>
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Aditi Sarki</h3>
+                            <p class="member-designation">Counselling Psychologist</p>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-bg color-2"></div>
+                        <div class="img-container">
+                            <div class="img-placeholder">SN</div>
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Swati Navalgundkar</h3>
+                            <p class="member-designation">Counselling Psychologist</p>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-bg color-0"></div>
+                        <div class="img-container">
+                            <div class="img-placeholder">TL</div>
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Tamanna Amin Laskar</h3>
+                            <p class="member-designation">Counselling Psychologist</p>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <div class="img-placeholder">PS</div>
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Parena Sahukar</h3>
+                            <p class="member-designation">Counselling Psychologist</p>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="400">
+                        <div class="card-bg color-2"></div>
+                        <div class="img-container">
+                            <div class="img-placeholder">JJ</div>
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Jaanvi Java</h3>
+                            <p class="member-designation">Counselling Psychologist</p>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="500">
+                        <div class="card-bg color-0"></div>
+                        <div class="img-container">
+                            <div class="img-placeholder">SP</div>
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Sameeksha Phadke</h3>
+                            <p class="member-designation">Counselling Psychologist</p>
+                        </div>
+                    </div>
+                    <div class="service-card" data-aos="fade-up" data-aos-delay="600">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <div class="img-placeholder">SS</div>
+                        </div>
+                        <div class="service-info">
+                            <h3 class="member-name">Sneha Shivarajan</h3>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="role-section">
+                <h2 class="role-title" data-aos="fade-right">Team Members</h2>
+                <div class="team-grid">
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <img src="images/Akash_Kapdekar.jpg" alt="Akash Kapdekar" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Akash Kapdekar</h3>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/akashkapdekar/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BpN9H4od3Rb%2BJ3JoEnZAWhw%3D%3D"
+                                class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-bg color-2"></div>
+                        <div class="img-container">
+                            <img src="images/Aakash_Khemchandani.jpg" alt="Aakash Khemchandani" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Aakash Khemchandani</h3>
+                        <p class="member-designation">Content Writer | Never Grow Up </p>
+
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-bg color-0"></div>
+                        <div class="img-container">
+                            <img src="images/Abhishek_Hawal.jpg" alt="Abhishek Hawal" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Abhishek Hawal</h3>
+                        <p class="member-designation">Associate Director | Business Growth | Never Grow Up </p>
+
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <img src="images/Angad_Saimbi.png" alt="Angad Saimbi" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Angad Saimbi</h3>
+                        <p class="member-designation">Associate Director | Business Growth | Yellow Seed </p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-bg color-2"></div>
+                        <div class="img-container">
+                            <img src="images/Chaitrali_Joshi.jpg" alt="Chaitrali Joshi" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Chaitrali Joshi</h3>
+                        <p class="member-designation">Content Writer | Never Grow Up </p>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/chaitrali-joshi-59a27b230/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BVV0PxzpBRsuRdvY7C9NpFw%3D%3D"
+                                class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-bg color-0"></div>
+                        <div class="img-container">
+                            <img src="images/Danesh_Mistry.jpg" alt="Danesh Mistry" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Danesh Mistry</h3>
+                        <p class="member-designation">Growth Associate | Never Grow Up</p>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/daneshmistry/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BxQ%2F1A1LlSL6U%2Fu5eDPrXHg%3D%3D"
+                                class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <img src="images/Deepa_Venkatraman.jpg" alt="Deepa Venkatraman" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Deepa Venkatraman</h3>
+                        <p class="member-designation">Senior Creative Strategist | Never Grow Up</p>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/deepavenkatraman13/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BEFK2ppInQimPyn5Rn6Mqsg%3D%3D"
+                                class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card-bg color-2"></div>
+                        <div class="img-container">
+                            <img src="images/Eva_Ninan.jpg" alt="Eva Ninan" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Eva Ninan</h3>
+                        <p class="member-designation">Client Success Associate </p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-bg color-0"></div>
+                        <div class="img-container">
+                            <div class="img-placeholder">G</div>
+                        </div>
+                        <h3 class="member-name">Gracia Carvalho</h3>
+                        <p class="member-designation">Client Success Associate </p>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/graciacarvalho07/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BM22xmk%2BPSguxxXQzLuw9TQ%3D%3D"
+                                class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <img src="images/Immanuel_Kumar.jpg" alt="Immanuel Kumar" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Immanuel Kumar</h3>
+                        <p class="member-designation">Graphic Designer | Yellow Seed </p>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/immanuel-kumar-333-dev/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BbAsL1V6yS5mNrC%2Fz9ygdxg%3D%3D"
+                                class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-bg color-2"></div>
+                        <div class="img-container">
+                            <img src="images/Jahnavi_Singh.jpg" alt="Jahnavi Singh" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Jahnavi Singh</h3>
+                        <p class="member-designation">Client Success Associate | NGU</p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card-bg color-0"></div>
+                        <div class="img-container">
+                            <img src="images/Jenica_Mehta.jpg" alt="Jenica Mehta" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Jenica Mehta</h3>
+                        <p class="member-designation">Sr. Public Relations & Communications Associate | SPRD </p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <img src="images/Kinjal_Bhanushali.jpg" alt="Kinjal Bhanushali" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Kinjal Bhanushali</h3>
+                        <p class="member-designation">Public Relations Associate | SPRD </p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-bg color-2"></div>
+                        <div class="img-container">
+                            <img src="images/Laksh_Bansal.jpg" alt="Laksh Bansal" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Laksh Bansal</h3>
+                        <p class="member-designation">Social Media Strategist | Never Grow Up</p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-bg color-0"></div>
+                        <div class="img-container">
+                            <img src="images/Malavika_Binu.jpg" alt="Malavika Binu" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Malavika Binu</h3>
+                        <p class="member-designation">Sr. Content Writer | Never Grow Up</p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <img src="images/Naina_Talreja.jpg" alt="Naina Talreja" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Naina Talreja</h3>
+                        <p class="member-designation">Graphic Designer </p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-bg color-2"></div>
+                        <div class="img-container">
+                            <img src="images/Nidhi_Pawar.jpg" alt="Nidhi Pawar" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Nidhi Pawar</h3>
+                        <p class="member-designation">Sr. Public Relations & Communications Associate</p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-bg color-0"></div>
+                        <div class="img-container">
+                            <img src="images/Pavitra_Mudaliar.jpg" alt="Pavitra Mudaliar" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Pavitra Mudaliar</h3>
+                        <p class="member-designation">Communication & Social Media Associate </p>
+                        <div class="social-links">
+                            <a href="https://www.linkedin.com/in/pavitra-mudaliar-744592363/?lipi=urn%3Ali%3Apage%3Ad_flagship3_search_srp_all%3BQJ7yRiqwRGS3nICfv5qjwg%3D%3D"
+                                class="social-icon" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <img src="images/Pranita_Panchal.jpg" alt="Pranita Panchal" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Pranita Panchal</h3>
+                        <p class="member-designation">ORM Associate | SPRD </p>
+
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card-bg color-2"></div>
+                        <div class="img-container">
+                            <img src="images/Rianna_Tarapore.jpg" alt="Rianna Tarapore" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Rianna Tarapore</h3>
+                        <p class="member-designation">Content Writer </p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-bg color-0"></div>
+                        <div class="img-container">
+                            <img src="images/Salonee_Rajadhyaksha.jpg" alt="Salonee Rajadhyaksha" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Salonee Rajadhyaksha</h3>
+                        <p class="member-designation">Client Success Associate</p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <img src="images/Shinjita_Ghosh.jpg" alt="Shinjita Ghosh" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Shinjita Ghosh</h3>
+                        <p class="member-designation">Content Writer </p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="200">
+                        <div class="card-bg color-2"></div>
+                        <div class="img-container">
+                            <img src="images/Srishti_Das.jpg" alt="Srishti Das" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Srishti Das</h3>
+                        <p class="member-designation">Client Success Associate</p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="300">
+                        <div class="card-bg color-0"></div>
+                        <div class="img-container">
+                            <img src="images/Twisha_Thakore.jpg" alt="Twisha Thakore" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Twisha Thakore</h3>
+                        <p class="member-designation">People & Culture Consultant </p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="0">
+                        <div class="card-bg color-1"></div>
+                        <div class="img-container">
+                            <img src="images/Vidisha_Verma.jpg" alt="Vidisha Verma" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Vidisha Verma</h3>
+                        <p class="member-designation">Content Writer </p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="team-card" data-aos="fade-up" data-aos-delay="100">
+                        <div class="card-bg color-2"></div>
+                        <div class="img-container">
+                            <img src="images/Vinayak_Gunjal.png" alt="Vinayak Gunjal" loading="lazy">
+                        </div>
+                        <h3 class="member-name">Vinayak Gunjal</h3>
+                        <p class="member-designation">Quantitative Researcher </p>
+                        <div class="social-links">
+                            <a href="#" class="social-icon" target="_blank" rel="noopener noreferrer"
+                                aria-label="LinkedIn">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512">
+                                    <path
+                                        d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                                </svg>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-container">
+            <div class="footer-top">
+                <!-- Col 1: Contact Us -->
+                <div class="footer-col">
+                    <h3 class="footer-title">Contact Us</h3>
+
+                    <div class="contact-grid">
+                        <div class="contact-label">PHONE</div>
+                        <div class="contact-value">+91 88284 39700</div>
+
+                        <div class="contact-label">EMAIL</div>
+                        <div class="contact-value">hello@goodwavefoundation.org</div>
+
+                        <div class="contact-label">ADDRESS</div>
+                        <div class="contact-value">Awfis @ The Ruby, JK Sawant Marg, Dadar West, Mumbai,<br>Maharashtra
+                            400028.</div>
+                    </div>
+
+                    <p class="bold-contact-text">You can be an active part of this movement by spreading the<br>word
+                        about what we do. Or you can share your own story too.</p>
+                    <p class="normal-contact-text">Like. Share. Comment. Every little bit helps.</p>
+
+                    <div class="footer-socials">
+                        <a href="#" class="footer-social-btn" aria-label="Instagram">
+                            <svg viewBox="0 0 448 512">
+                                <path
+                                    d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.5-25.9-7.1-48.9-24.5-66.4-17.4-17.4-40.4-23-66.4-24.5-27.4-1.6-109.4-1.6-136.8 0-25.9 1.5-48.9 7.1-66.4 24.5-17.4 17.4-23 40.4-24.5 66.4-1.6 27.4-1.6 109.4 0 136.8 1.5 25.9 7.1 48.9 24.5 66.4 17.4 17.4 40.4 23 66.4 24.5 27.4 1.6 109.4 1.6 136.8 0 25.9-1.5 48.9-7.1 66.4-24.5 17.4-17.4 23-40.4 24.5-66.4 1.6-27.4 1.6-109.4 0-136.8zM388.5 388.5c-11.1 11.1-26.1 14.9-52 16.5-25.2 1.5-101.4 1.5-126.6 0-25.9-1.5-40.9-5.4-52-16.5-11.1-11.1-14.9-26.1-16.5-52-1.5-25.2-1.5-101.4 0-126.6 1.5-25.9 5.4-40.9 16.5-52 11.1-11.1 26.1-14.9 52-16.5 25.2-1.5 101.4-1.5 126.6 0 25.9 1.5 40.9 5.4 52 16.5 11.1 11.1 14.9 26.1 16.5 52 1.5 25.2 1.5 101.4 0 126.6-1.5 26-5.4 41-16.5 52z" />
+                            </svg>
+                        </a>
+                        <a href="#" class="footer-social-btn" aria-label="LinkedIn">
+                            <svg viewBox="0 0 448 512">
+                                <path
+                                    d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Spread The Word -->
+                <div class="footer-col">
+                    <h3 class="footer-title">Spread The Word</h3>
+                    <p class="spread-word-text">Want to offer your time as a Mental Health Professional,<br>Intern,
+                        Campus Ambassador? Or be a donor?</p>
+                    <p class="spread-word-text">We are always looking for more hands on deck.</p>
+
+                    <form class="footer-form">
+                        <input type="text" class="form-input" placeholder="Name" required>
+                        <input type="email" class="form-input" placeholder="Email" required>
+                        <input type="tel" class="form-input" placeholder="Phone">
+
+                        <div class="form-action-row">
+                            <button type="submit" class="submit-btn" aria-label="Submit Form">Submit</button>
+                            <a href="#" class="back-to-top">Back to Top</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p class="footer-text">All donations to Good Wave Foundation are eligible for a <strong>tax exemption
+                        under section 80G</strong> of the Income Tax Act.</p>
+                <p class="footer-text">Good Wave Foundation is a <strong>not for profit organization</strong>,
+                    registered as Good Wave Foundation under section 8 of the Companies Act, 2013.</p>
+
+                <div class="footer-bottom-links">
+                    <span>© 2025 by Good Wave Foundation. All Rights Reserved</span>
+                    <span style="color: rgba(0,0,0,0.2)">|</span>
+                    <a href="#">Certification</a>
+                    <span style="color: rgba(0,0,0,0.2)">|</span>
+                    <a href="#">Privacy Policy</a>
+                    <span style="color: rgba(0,0,0,0.2)">|</span>
+                    <a href="#">Terms Of Use</a>
+                    <span style="color: rgba(0,0,0,0.2)">|</span>
+                    <a href="#">Donate</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 100
+            });
+        });
+    </script>
+</body>
+
+</html>
